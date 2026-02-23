@@ -1,7 +1,0 @@
-@import 'variables.css';
-
-body.animate-color-scheme-switch {
-  transition:
-    color var(--animation-fade),
-    background-color var(--animation-fade);
-}
