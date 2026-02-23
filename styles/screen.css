@@ -20,7 +20,7 @@ h1,
 h2,
 h3 {
   line-height: 1;
-  letter-spacing: var(--tracking-s);
+  letter-spacing: -0.075ch;
 }
 
 h1 {
