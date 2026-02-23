@@ -20,8 +20,8 @@
 }
 
 .region {
-  padding-top: var(--region-space, var(--space-l-2xl));
-  padding-bottom: var(--region-space, var(--space-l-2xl));
+  padding-top: var(--region-space, var(--space-2-4));
+  padding-bottom: var(--region-space, var(--space-2-4));
 }
 
 .wrapper {
