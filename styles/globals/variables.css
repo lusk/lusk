@@ -34,4 +34,8 @@
   --info-color: darkblue;
   --warning-color: orange;
   --error-color: red;
+  --transition-base: .25s ease;
+  --transition-movement: .2s linear;
+  --transition-fade: .2s ease;
+  --transition-bounce: .5s cubic-bezier(.5, .05, .2, 1.5);
 }
