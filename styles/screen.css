@@ -4,7 +4,7 @@ body {
   font-size: var(--txt-0);
   line-height: 1.4;
   letter-spacing: var(--tracking);
-  margin-top: var(--region-space, var(--space-2xl));
+  margin-top: var(--region-space, var(--space-4));
 }
 
 body[data-color-scheme=light] color-scheme-switch::part(light),
@@ -24,15 +24,15 @@ h3 {
 }
 
 h1 {
-  font-size: var(--size-5);
+  font-size: var(--txt-5);
 }
 
 h2 {
-  font-size: var(--size-4);
+  font-size: var(--txt-4);
 }
 
 h3 {
-  font-size: var(--size-3);
+  font-size: var(--txt-3);
 }
 
 /* Set line lengths */
