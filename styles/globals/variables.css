@@ -27,6 +27,7 @@
   --space-4-5: clamp(4rem, 2.68rem + 6.602vw, 8.25rem);
   --space-m3-1: clamp(.25rem, -.313rem + 2.816vw, 2.063rem);
   --space-m1-2: clamp(.75rem, .129rem + 3.107vw, 2.75rem);
+  --space-2-4: clamp(3rem, 2.223rem + 3.883vw, 5.5rem);
   --gutter: var(--space-m1-0);
   --border-radius: var(--space-m3);
   --tracking: -.05ch;
