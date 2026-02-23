@@ -1,64 +1,37 @@
 :root {
-  --animation-fade: 1s ease-out;
-
-  /* --- TEXT SIZES START --- */
-  /* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1350,20,1.25,6,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-
-  /* size -1: 14.2222px → 16px */
-  --size--1: clamp(0.8889rem, 0.8544rem + 0.1726vi, 1rem);
-  /* size 0: 16px → 20px */
-  --size-0: clamp(1rem, 0.9223rem + 0.3883vi, 1.25rem);
-  /* size 1: 18px → 25px */
-  --size-1: clamp(1.125rem, 0.9891rem + 0.6796vi, 1.5625rem);
-  /* size 2: 20.25px → 31.25px */
-  --size-2: clamp(1.2656rem, 1.052rem + 1.068vi, 1.9531rem);
-  /* size 3: 22.7813px → 39.0625px */
-  --size-3: clamp(1.4238rem, 1.1077rem + 1.5807vi, 2.4414rem);
-  /* size 4: 25.6289px → 48.8281px */
-  --size-4: clamp(1.6018rem, 1.1513rem + 2.2524vi, 3.0518rem);
-  /* size 5: 28.8325px → 61.0352px */
-  --size-5: clamp(1.802rem, 1.1767rem + 3.1265vi, 3.8147rem);
-  /* size 6: 32.4366px → 76.2939px */
-  --size-6: clamp(2.0273rem, 1.1757rem + 4.258vi, 4.7684rem);
-
-  /* --- TEXT SIZES END --- */
-
-  /* --- SPACING START --- */
-  /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1350,20,1.414,8,1,&s=0.75|0.5|0.25,2|3|5|8|13,s-l&g=s,l,xl,12 */
-
-  --space-3xs: clamp(0.25rem, 0.2306rem + 0.0971vi, 0.3125rem);
-  --space-2xs: clamp(0.5rem, 0.4612rem + 0.1942vi, 0.625rem);
-  --space-xs: clamp(0.75rem, 0.6917rem + 0.2913vi, 0.9375rem);
-  --space-s: clamp(1rem, 0.9223rem + 0.3883vi, 1.25rem);
-  --space-m: clamp(2rem, 1.8447rem + 0.7767vi, 2.5rem);
-  --space-l: clamp(3rem, 2.767rem + 1.165vi, 3.75rem);
-  --space-xl: clamp(5rem, 4.6117rem + 1.9417vi, 6.25rem);
-  --space-2xl: clamp(8rem, 7.3786rem + 3.1068vi, 10rem);
-  --space-3xl: clamp(13rem, 11.9903rem + 5.0485vi, 16.25rem);
-
-  /* One-up pairs */
-  --space-3xs-2xs: clamp(0.25rem, 0.1335rem + 0.5825vi, 0.625rem);
-  --space-2xs-xs: clamp(0.5rem, 0.3641rem + 0.6796vi, 0.9375rem);
-  --space-xs-s: clamp(0.75rem, 0.5947rem + 0.7767vi, 1.25rem);
-  --space-s-m: clamp(1rem, 0.534rem + 2.3301vi, 2.5rem);
-  --space-m-l: clamp(2rem, 1.4563rem + 2.7184vi, 3.75rem);
-  --space-l-xl: clamp(3rem, 1.9903rem + 5.0485vi, 6.25rem);
-  --space-xl-2xl: clamp(5rem, 3.4466rem + 7.767vi, 10rem);
-  --space-2xl-3xl: clamp(8rem, 5.4369rem + 12.8155vi, 16.25rem);
-
-  /* Custom pairs */
-  --space-s-l: clamp(1rem, 0.1456rem + 4.2718vi, 3.75rem);
-
-  /* --- SPACING END --- */
-
-  --gutter: var(--space-s-m);
-  --border-radius: var(--size-step-1);
-  --transition-base: 250ms ease;
-  --transition-movement: 200ms linear;
-  --transition-fade: 200ms ease;
-  --transition-bounce: 500ms cubic-bezier(0.5, 0.05, 0.2, 1.5);
-  --tracking: -0.05ch;
-  --tracking-s: -0.075ch;
+  --txt-m3: clamp(.512rem, .491rem + .106vw, .581rem);
+  --txt-m2: clamp(.64rem, .598rem + .208vw, .774rem);
+  --txt-m1: clamp(.8rem, .728rem + .36vw, 1.032rem);
+  --txt-0: clamp(1rem, .883rem + .583vw, 1.375rem);
+  --txt-1: clamp(1.25rem, 1.069rem + .905vw, 1.833rem);
+  --txt-2: clamp(1.563rem, 1.289rem + 1.368vw, 2.443rem);
+  --txt-3: clamp(1.953rem, 1.548rem + 2.025vw, 3.257rem);
+  --txt-4: clamp(2.441rem, 1.851rem + 2.951vw, 4.341rem);
+  --txt-5: clamp(3.052rem, 2.202rem + 4.249vw, 5.787rem);
+  --space-m3: clamp(.25rem, .211rem + .194vw, .375rem);
+  --space-m2: clamp(.5rem, .442rem + .291vw, .688rem);
+  --space-m1: clamp(.75rem, .653rem + .485vw, 1.063rem);
+  --space-0: clamp(1rem, .883rem + .583vw, 1.375rem);
+  --space-1: clamp(1.5rem, 1.325rem + .874vw, 2.063rem);
+  --space-2: clamp(2rem, 1.767rem + 1.165vw, 2.75rem);
+  --space-3: clamp(3rem, 2.65rem + 1.748vw, 4.125rem);
+  --space-4: clamp(4rem, 3.534rem + 2.33vw, 5.5rem);
+  --space-5: clamp(6rem, 5.301rem + 3.495vw, 8.25rem);
+  --space-m3-m2: clamp(.25rem, .114rem + .68vw, .688rem);
+  --space-m2-m1: clamp(.5rem, .325rem + .874vw, 1.063rem);
+  --space-m1-0: clamp(.75rem, .556rem + .971vw, 1.375rem);
+  --space-0-1: clamp(1rem, .67rem + 1.65vw, 2.063rem);
+  --space-1-2: clamp(1.5rem, 1.112rem + 1.942vw, 2.75rem);
+  --space-2-3: clamp(2rem, 1.34rem + 3.301vw, 4.125rem);
+  --space-3-4: clamp(3rem, 2.223rem + 3.883vw, 5.5rem);
+  --space-4-5: clamp(4rem, 2.68rem + 6.602vw, 8.25rem);
+  --space-m3-1: clamp(.25rem, -.313rem + 2.816vw, 2.063rem);
+  --space-m1-2: clamp(.75rem, .129rem + 3.107vw, 2.75rem);
+  --gutter: var(--space-m1-0);
+  --border-radius: var(--space-m3);
+  --tracking: -.05ch;
+  --success-color: green;
+  --info-color: darkblue;
+  --warning-color: orange;
+  --error-color: red;
 }
-
-

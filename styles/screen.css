@@ -1,9 +1,7 @@
-@import "globals/variables.css";
-
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-size: var(--size-1);
+  font-size: var(--txt-0);
   line-height: 1.4;
   letter-spacing: var(--tracking);
   margin-top: var(--region-space, var(--space-2xl));

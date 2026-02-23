@@ -1,7 +1,7 @@
 .grid {
   grid-template-columns: repeat(var(--grid-placement, auto-fill),
     minmax(var(--grid-min-item-size, 16rem), 1fr));
-  gap: var(--gutter, var(--space-s-l));
+  gap: var(--gutter, var(--space-m1-2));
   display: grid;
 }
 
@@ -35,7 +35,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   body.animate-color-scheme-switch {
-    transition: color var(--animation-fade),
-      background-color var(--animation-fade);
+    transition: color var(--animation-fade, 1s ease-out),
+      background-color var(--animation-fade, 1s ease-out);
   }
+}
+
+body {
+  font-size: var(--txt-0);
 }
