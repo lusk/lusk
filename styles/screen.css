@@ -69,18 +69,3 @@ a {
     text-decoration: none;
   }
 }
-
-.brand {
-  & #background {
-    fill: var(--logo-bg-color);
-  }
-
-  & #foreground {
-    fill: var(--logo-text-color);
-    stroke: var(--logo-text-color);
-    stroke-width: .5;
-  }
-  & .text {
-    fill: var(--logo-bg-color);
-  }
-}
