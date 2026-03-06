@@ -5,7 +5,7 @@ const prefixAttributeDefault = 'theme-'
 const osColorSchemes = { light: 'light', dark: 'dark' } // Standard operating system's modes need special mediaQuery treatment
 const defaultStyles = `<style>button { font-size: inherit; cursor: pointer; display: inline-block; }</style>`
 const markupFor = `<button onclick="this.getRootNode().host.setNextTheme()" part="button"><slot>theme</slot></button>`
-const slotMarkupFor = (keyword) => `<button onclick="this.getRootNode().host.setTheme('${keyword}')" part="button"><slot name="${keyword}">${keyword}</slot></button>`
+const slotMarkupFor = (keyword) => `<button onclick="this.getRootNode().host.setTheme('${keyword}')" part="button ${keyword}"><slot name="${keyword}">${keyword}</slot></button>`
 const template = document.createElement('template')
 
 function* repeatedArray(arr) {
@@ -13,6 +13,15 @@ function* repeatedArray(arr) {
   while (true) {
     yield arr[index++ % arr.length]
   }
+}
+
+function toCamelCase(str) {
+  const parts = str.trim().toLowerCase().split('-')
+  const firstPart = parts.shift()
+
+  return firstPart + parts.map((str) =>
+    str[0].toUpperCase().concat(str.slice(1))
+  ).join('')
 }
 
 const getStyleElements = (themes) => {
@@ -65,7 +74,7 @@ class ThemeSwitcher extends HTMLElement{
     }
 
     if (selected === null) {
-      delete this.bodyEl.dataset.colorScheme
+      delete this.bodyEl.dataset[toCamelCase(customElementName)]
 
       const all = Array.from(document.querySelectorAll(`link[rel=stylesheet][href*="${this.prefixString}"]`))
 
@@ -81,7 +90,7 @@ class ThemeSwitcher extends HTMLElement{
         el.media = query
       })
     } else {
-      this.bodyEl.dataset.colorScheme = selected
+      this.bodyEl.dataset[toCamelCase(customElementName)] = selected
 
       this.themes.map(theme => {
         if (theme === selected) {
