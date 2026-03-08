@@ -1,12 +1,6 @@
 const customElementName = 'theme-switcher'
-const modesAttributeName = 'supported'
-const prefixAttributeName = 'prefix'
-const prefixAttributeDefault = 'theme-'
+const allowedAttrName = 'allowed'
 const osColorSchemes = { light: 'light', dark: 'dark' } // Standard operating system's modes need special mediaQuery treatment
-const defaultStyles = `<style>button { font-size: inherit; cursor: pointer; display: inline-block; }</style>`
-const markupFor = `<button onclick="this.getRootNode().host.setNextTheme()" part="button"><slot>theme</slot></button>`
-const slotMarkupFor = (keyword) => `<button onclick="this.getRootNode().host.setTheme('${keyword}')" part="button ${keyword}"><slot name="${keyword}">${keyword}</slot></button>`
-const template = document.createElement('template')
 
 function* repeatedArray(arr) {
   let index = 0
@@ -24,81 +18,56 @@ function toCamelCase(str) {
   ).join('')
 }
 
-const getStyleElements = (themes) => {
-  return themes.reduce((memo,theme) => {
-      const found = document.querySelector(`link[rel=stylesheet][href*="${theme}"]`)
-
-      if (found !== null) {
-        memo[theme] = found
-      } else {
-        console.warn(`Stylesheet link for '${theme}' theme was not found in the document <head> section.`)
-      }
-
-      return memo
-    }, {})
+function themeFromDataset (el) {
+  return el.dataset[toCamelCase(customElementName)]
 }
 
-class ThemeSwitcher extends HTMLElement{
+class ThemeSwitcher extends HTMLButtonElement{
+  // Changes to the following attributes trigger attributeChangedCallback
+  static observedAttributes = [allowedAttrName]
+
   constructor(){
     super()
+    this.debug = false
     this.prefersDark = undefined
     this.localStorageKey = customElementName
   }
 
-  styleElementMedia = (key, operation) => {
-    if (!operation) return
+  setLinkMedia = (el, selectedTheme) => {
+    const linkTheme = themeFromDataset(el)
+    const operation = selectedTheme === null ? 'reset' : selectedTheme === linkTheme ? 'enable' : 'disable'
+    let query = undefined
 
-    if (!Object.keys(this.linkedStylesElements).includes(key)) {
-      console.warn(`Stylesheet link for '${key}' theme was not found in the document <head> section.`)
+    switch (operation) {
+      case 'enable':
+        query = 'all'
+        break
+      case 'disable':
+        query = 'not all'
+        break
+      case 'reset':
+        query = Object.values(osColorSchemes).includes(linkTheme) ? `(prefers-color-scheme: ${linkTheme})` : 'not all'
+        break
+      default:
+        if (this.debug) console.debug('Invalid operation aborted.')
+      return
     }
 
-    const el = this.linkedStylesElements[key]
-
-    if (operation === 'enable') {
-      el.media = 'all'
-    }
-
-    if (operation === 'disable') {
-      el.media = 'not all'
-    }
-
-    if (operation === 'reset') {
-      el.media = Object.values(osColorSchemes).includes(key) ? `(prefers-color-scheme: ${key})` : 'not all'
-    }
+    el.media = query
   }
 
-  useScheme = (selected) => {
+  useTheme = (selected) => {
     if (selected === undefined) {
-      console.warn(`Attempt to use undefined theme canceled!`)
+      if (this.debug) console.debug(`Attempt to use undefined theme canceled!`)
       return
     }
 
     if (selected === null) {
       delete this.bodyEl.dataset[toCamelCase(customElementName)]
-
-      const all = Array.from(document.querySelectorAll(`link[rel=stylesheet][href*="${this.prefixString}"]`))
-
-      all.map(el => {
-        let query = 'not all'
-
-        if (el.getAttribute('href').includes(osColorSchemes.light)) {
-          query = `(prefers-color-scheme: ${osColorSchemes.light})`
-        } else if (el.getAttribute('href').includes(osColorSchemes.dark)) {
-          query = `(prefers-color-scheme: ${osColorSchemes.dark})`
-        }
-
-        el.media = query
-      })
+      this.themesLinks.map(el => this.setLinkMedia(el, null))
     } else {
       this.bodyEl.dataset[toCamelCase(customElementName)] = selected
-
-      this.themes.map(theme => {
-        if (theme === selected) {
-          this.styleElementMedia(selected, 'enable')
-        } else {
-          this.styleElementMedia(theme, 'disable')
-        }
-      })
+      this.themesLinks.map(el => this.setLinkMedia(el, selected))
     }
 
     // Even if we're reseting to system default (in other words !selected is true)
@@ -118,18 +87,13 @@ class ThemeSwitcher extends HTMLElement{
     return window.localStorage.getItem(this.localStorageKey)
   }
 
-  setOverridePreference = (nextColorScheme) => {
-    if (nextColorScheme === null) {
-     console.warn('Discarded localStorage.setItem(null)')
+  setOverridePreference = (nextTheme) => {
+    if ([null, undefined].includes(nextTheme)) {
+      if (this.debug) console.debug('Discarded localStorage.setItem attempt')
      return
     }
 
-    if (nextColorScheme === undefined) {
-     console.warn('Attempted localStorage.setItem(undefined)')
-     return
-    }
-
-    window.localStorage.setItem(this.localStorageKey, nextColorScheme)
+    window.localStorage.setItem(this.localStorageKey, nextTheme)
   }
 
   removeOverridePreference = () => {
@@ -141,10 +105,10 @@ class ThemeSwitcher extends HTMLElement{
 
     if (newTheme === overridePreference) {
       this.removeOverridePreference()
-      this.useScheme(null)
+      this.useTheme(null)
     } else {
       this.setOverridePreference(newTheme)
-      this.useScheme(newTheme)
+      this.useTheme(newTheme)
     }
   }
 
@@ -153,9 +117,9 @@ class ThemeSwitcher extends HTMLElement{
 
     if (newTheme === undefined) {
       this.removeOverridePreference()
-      this.useScheme(null)
+      this.useTheme(null)
     } else {
-      this.useScheme(newTheme)
+      this.useTheme(newTheme)
       this.setOverridePreference(newTheme)
     }
   }
@@ -165,8 +129,9 @@ class ThemeSwitcher extends HTMLElement{
     const overridePreference = this.getOverridePreference()
     let current = overridePreference === null ? systemPreference : overridePreference
 
-    if (!this.themes.includes(current)) {
-      console.warn(`'${current}' theme not found in declared themes`)
+    if (!this.allowedThemes.includes(current)) {
+      if (this.debug) console.debug(`Preferred '${current}' theme not allowed. Falling back to OS system preference.`)
+
       return undefined
     }
 
@@ -178,67 +143,66 @@ class ThemeSwitcher extends HTMLElement{
     return this.themesGenerator.next().value
   }
 
-  usePrefered = () => {
-    const systemPreference = this.getSystemPreference()
-    const overridePreference = this.getOverridePreference()
-
-    if (overridePreference === null) {
-      this.useScheme(systemPreference)
+  clickHandler = () => {
+    if (this.allowedThemes.length > 1) {
+      // More allowed themes means cycling through them
+      this.setNextTheme()
     } else {
-      this.useScheme(overridePreference)
+      // Single allowed theme means selecting it
+      this.setTheme(this.allowedThemes[0])
     }
   }
 
-  connectedCallback(){
-    const customPrefix = this.getAttribute(prefixAttributeName)
-    this.prefixString = customPrefix ? customPrefix : prefixAttributeDefault
+  connectedCallback() {
+    this.debug = this.getAttribute('debug') === null ? false : true
+    this.themesLinks = Array.from(document.querySelectorAll(`link[rel=stylesheet][data-${customElementName}]`))
+    this.themes = Array.from(new Set(this.themesLinks.map(el => themeFromDataset(el))))
+    this.allowedThemes = this.themes
 
-    this.modesListString = this.getAttribute(modesAttributeName)
+    let errorMessage
+    const errorMarkup = '<em style="cursor: help;">Almost there!</em>'
 
-    if (!this.modesListString) {
-      console.warn(`Missing '${modesAttributeName}' attribute`)
+    if (!this.themes.includes(osColorSchemes.light)) {
+      errorMessage = `Could not find '<link rel="stylesheet" data-${customElementName}="${osColorSchemes.light}" ...' in <head> section`
+      if (this.debug) {
+        console.debug(errorMessage)
+        this.innerHTML = errorMarkup
+        this.title = errorMessage
+      } else {
+        this.innerHTML = null
+      }
+
       return
     }
 
-    this.declaredThemes = this.modesListString.split(' ')
-
-    if (!Object.keys(osColorSchemes).every(key => this.declaredThemes.includes(key)) ) {
-      console.warn(`The '${modesAttributeName}' attribute must include at least '${Object.values(osColorSchemes).join(' ')}' values`)
+    if (!this.themes.includes(osColorSchemes.dark)) {
+      errorMessage = `Could not find '<link rel="stylesheet" data-${customElementName}="${osColorSchemes.dark}" ...' in <head> section`
+      if (this.debug) console.debug(errorMessage)
       return
     }
 
-    // Query for stylesheet link tags of all declared themes
-    this.linkedStylesElements = getStyleElements(this.declaredThemes)
+    // If allowed attribute is present restrict the list of linked themes to allowed ones only
+    const allowedString = this.getAttribute(allowedAttrName)
+    if (allowedString !== null) {
+      this.allowedThemes = allowedString.split(' ').filter(key => this.themes.includes(key))
+    }
+
+    // Create endless sequence of themes to cycle through
+    this.themesGenerator  = repeatedArray(this.allowedThemes)
+
     this.bodyEl = document.querySelector('body')
-    // But only the actually linked themes should be taken into account
-    this.themes =  Object.keys(this.linkedStylesElements)
 
-    // Query inside of the webcomponent for elements with `slot` attribute
-    // This will help with deciding what kind of markup should be rendered
-    // either single button that cycles themes or one button for each theme
-    const slotsUsed = this.querySelectorAll("[slot]").length === 0 ? false : true
+    this.addEventListener('click', this.clickHandler)
 
-    this.attachShadow({ mode: 'open'})
-
-    this.themesGenerator  = repeatedArray(this.themes)
-
-    template.innerHTML = `
-    ${ defaultStyles }
-    ${ slotsUsed ? this.themes.map(theme => slotMarkupFor(theme)).join('') : markupFor }`
-
-    this.shadowRoot.appendChild(template.content.cloneNode(true))
-
-    this.preferenceChangeHandler = (e) => {
-      // TODO: In future handle changes to img src attributes here to match system color scheme
-      void(e)
-    }
+    this.preferenceChangeHandler = (e) => void(e) // TODO: In future handle changes to img src attributes here to match system color scheme
 
     if (window.hasOwnProperty('matchMedia')) {
       this.prefersDark = window.matchMedia(`(prefers-color-scheme: ${osColorSchemes.dark})`)
       this.prefersDark.addEventListener('change', this.preferenceChangeHandler)
     }
 
-    this.usePrefered()
+    // Use persisted value if any
+    this.useTheme(this.getOverridePreference())
     this.render()
   }
 
@@ -246,15 +210,15 @@ class ThemeSwitcher extends HTMLElement{
     if (this.prefersDark instanceof MediaQueryList) {
       this.prefersDark.removeEventListener('change', this.preferenceChangeHandler)
     }
+
+    this.removeEventListener('click', this.clickHandler)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log(
-      `Attribute ${name} has changed from ${oldValue} to ${newValue}.`,
-    );
+    if (this.debug) console.debug(`Attribute ${name} has changed from ${oldValue} to ${newValue}.`);
   }
 
   render(){}
 }
 
-window.customElements.define(customElementName, ThemeSwitcher)
+window.customElements.define(customElementName, ThemeSwitcher, { extends: 'button' })
