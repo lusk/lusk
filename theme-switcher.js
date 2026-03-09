@@ -192,7 +192,7 @@ class ThemeSwitcher extends HTMLButtonElement{
 
     this.bodyEl = document.querySelector('body')
 
-    this.addEventListener('click', this.clickHandler)
+    this.addEventListener('click touchstart', this.clickHandler)
 
     this.preferenceChangeHandler = (e) => void(e) // TODO: In future handle changes to img src attributes here to match system color scheme
 
@@ -211,7 +211,7 @@ class ThemeSwitcher extends HTMLButtonElement{
       this.prefersDark.removeEventListener('change', this.preferenceChangeHandler)
     }
 
-    this.removeEventListener('click', this.clickHandler)
+    this.removeEventListener('click touchstart', this.clickHandler)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
