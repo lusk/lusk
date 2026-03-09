@@ -72,7 +72,7 @@ class ThemeSwitcher extends HTMLButtonElement{
 
     // Even if we're reseting to system default (in other words !selected is true)
     // we need to animate the change
-    this.bodyEl.classList.add('animate-color-scheme-switch')
+    this.bodyEl.classList.add(`animate-${customElementName}`)
   }
 
   getSystemPreference = () => {
@@ -186,11 +186,14 @@ class ThemeSwitcher extends HTMLButtonElement{
       this.allowedThemes = allowedString.split(' ').filter(key => this.themes.includes(key))
     }
 
-    if (Object.entries({ role: 'button', type: 'button' }).map(entry => {
+    // Set up accessibility attributes if not already defined by the developer
+    if (Object.entries({
+      role: 'button',
+      type: 'button',
+      tabindex: '0'
+    }).map(entry => {
       const [attr, value ] = entry
-      if (!this.getAttribute(attr)) {
-        this.setAttribute(attr, value)
-      }
+      if (!this.getAttribute(attr)) { this.setAttribute(attr, value) }
     }))
 
     // Create endless sequence of themes to cycle through

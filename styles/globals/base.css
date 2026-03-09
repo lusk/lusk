@@ -34,7 +34,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  body.animate-color-scheme-switch {
+  body.animate-theme-switcher {
     transition: color var(--animation-fade, 1s ease-out),
       background-color var(--animation-fade, 1s ease-out);
   }
