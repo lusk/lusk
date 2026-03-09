@@ -190,7 +190,9 @@ class ThemeSwitcher extends HTMLButtonElement{
     if (Object.entries({
       role: 'button',
       type: 'button',
-      tabindex: '0'
+      tabindex: '0',
+      "aria-label": 'Change to different theme',
+      "aria-live": 'polite' // https://craigwfox.com/blog/2022-03/theme-toggle-web-component/
     }).map(entry => {
       const [attr, value ] = entry
       if (!this.getAttribute(attr)) { this.setAttribute(attr, value) }
