@@ -143,7 +143,7 @@ class ThemeSwitcher extends HTMLButtonElement{
     return this.themesGenerator.next().value
   }
 
-  clickHandler = () => {
+  eventHandler = () => {
     if (this.allowedThemes.length > 1) {
       // More allowed themes means cycling through them
       this.setNextTheme()
@@ -192,8 +192,8 @@ class ThemeSwitcher extends HTMLButtonElement{
 
     this.bodyEl = document.querySelector('body')
 
-    this.addEventListener('click', this.clickHandler)
-    this.addEventListener('touchstart', this.clickHandler)
+    this.addEventListener('click', this.eventHandler)
+    this.addEventListener('touchend', this.eventHandler)
 
     this.preferenceChangeHandler = (e) => void(e) // TODO: In future handle changes to img src attributes here to match system color scheme
 
@@ -212,8 +212,8 @@ class ThemeSwitcher extends HTMLButtonElement{
       this.prefersDark.removeEventListener('change', this.preferenceChangeHandler)
     }
 
-    this.removeEventListener('click', this.clickHandler)
-    this.removeEventListener('touchstart', this.clickHandler)
+    this.removeEventListener('click', this.eventHandler)
+    this.removeEventListener('touchend', this.eventHandler)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
