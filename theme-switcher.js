@@ -153,21 +153,26 @@ class ThemeSwitcher extends HTMLButtonElement{
     }
   }
 
+  hasRequiredTheme = (theme) => {
+    if (!this.themes.includes(theme)) {
+      throw new Error(`Could not find '<link rel="stylesheet" data-${customElementName}="${theme}" ...' in <head> section`)
+    }
+  }
+
   connectedCallback() {
     this.debug = this.getAttribute('debug') === null ? false : true
     this.themesLinks = Array.from(document.querySelectorAll(`link[rel=stylesheet][data-${customElementName}]`))
     this.themes = Array.from(new Set(this.themesLinks.map(el => themeFromDataset(el))))
     this.allowedThemes = this.themes
 
-    let errorMessage
-    const errorMarkup = '<em style="cursor: help;">Almost there!</em>'
-
-    if (!this.themes.includes(osColorSchemes.light)) {
-      errorMessage = `Could not find '<link rel="stylesheet" data-${customElementName}="${osColorSchemes.light}" ...' in <head> section`
+    try {
+      this.hasRequiredTheme(osColorSchemes.light)
+      this.hasRequiredTheme(osColorSchemes.dark)
+    } catch (err) {
       if (this.debug) {
-        console.debug(errorMessage)
-        this.innerHTML = errorMarkup
-        this.title = errorMessage
+        this.innerHTML = '<em style="cursor: help;">Almost there!</em>'
+        this.title = err
+        console.debug(err)
       } else {
         this.innerHTML = null
       }
@@ -175,17 +180,18 @@ class ThemeSwitcher extends HTMLButtonElement{
       return
     }
 
-    if (!this.themes.includes(osColorSchemes.dark)) {
-      errorMessage = `Could not find '<link rel="stylesheet" data-${customElementName}="${osColorSchemes.dark}" ...' in <head> section`
-      if (this.debug) console.debug(errorMessage)
-      return
-    }
-
-    // If allowed attribute is present restrict the list of linked themes to allowed ones only
-    const allowedString = this.getAttribute(allowedAttrName)
-    if (allowedString !== null) {
+    // If present, restrict the list of available themes to those specified by data-allowed attribute value (space-separated)
+    const allowedString = this.dataset[allowedAttrName]
+    if (allowedString) {
       this.allowedThemes = allowedString.split(' ').filter(key => this.themes.includes(key))
     }
+
+    if (Object.entries({ role: 'button', type: 'button' }).map(entry => {
+      const [attr, value ] = entry
+      if (!this.getAttribute(attr)) {
+        this.setAttribute(attr, value)
+      }
+    }))
 
     // Create endless sequence of themes to cycle through
     this.themesGenerator  = repeatedArray(this.allowedThemes)
@@ -193,7 +199,6 @@ class ThemeSwitcher extends HTMLButtonElement{
     this.bodyEl = document.querySelector('body')
 
     this.addEventListener('click', this.eventHandler)
-    this.addEventListener('touchend', this.eventHandler)
 
     this.preferenceChangeHandler = (e) => void(e) // TODO: In future handle changes to img src attributes here to match system color scheme
 
@@ -213,7 +218,6 @@ class ThemeSwitcher extends HTMLButtonElement{
     }
 
     this.removeEventListener('click', this.eventHandler)
-    this.removeEventListener('touchend', this.eventHandler)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
