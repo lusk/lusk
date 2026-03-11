@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="logo" viewBox="0 0 24 24">
+    <defs>
+        <style>
+            <![CDATA[#background{fill:#000000;stroke-width:0}#foreground{fill:#ffffff;stroke-width:0}@media(prefers-color-scheme:dark){#background{fill:#ffffff}#foreground{fill:#000000}}]]>
+        </style>
+    </defs>
+    <circle id="background" cx="12" cy="12" r="11.5"/>
+    <path id="foreground" d="M15.326 8 13 10.207l3.372 3.324-3.35 3.28 2.304 2.187 5.465-5.31v-.358ZM1.8 21.65h3.581L12.823 3H9.195Z"/>
+</svg>
