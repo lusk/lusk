@@ -1,0 +1,12 @@
+:root {
+  --bg-color: #191919;
+  --text-color: #aaa;
+  --header-color: #fff;
+  --logo-text-color: #000;
+  --logo-bg-color: #fff;
+  --link-color: #00b6f0;
+  --visited-link-color: #666;
+  --active-link-color: lightblue;
+  --muted-border-color: #323232;
+  --muted-bg-color: #222;
+}
