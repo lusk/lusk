@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="logo" viewBox="0 0 24 24">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="logo" viewBox="0 0 512 512">
     <defs>
         <style>
             <![CDATA[#background{fill:#000000;stroke-width:0}#foreground{fill:#ffffff;stroke-width:0}@media(prefers-color-scheme:dark){#background{fill:#ffffff}#foreground{fill:#000000}}]]>
         </style>
     </defs>
-    <circle id="background" cx="12" cy="12" r="11.5"/>
-    <path id="foreground" d="M15.326 8 13 10.207l3.372 3.324-3.35 3.28 2.304 2.187 5.465-5.31v-.358ZM1.8 21.65h3.581L12.823 3H9.195Z"/>
+    <circle id="background" cx="256" cy="256" r="206"/>
+    <path id="foreground" d="M75 460.86088h72.07281L296.85383 85.50261h-73.01876zm236.71-284.51304-41.79695 39.65855 60.593 59.73049-60.19769 58.93978 41.40164 39.2992 98.20305-95.4178v-6.43304z"/>
 </svg>
