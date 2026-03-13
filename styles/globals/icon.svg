@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="logo" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="logo" viewBox="0 0 412 412">
     <defs>
         <style>
-            <![CDATA[#background{fill:#7dbf1e;stroke-width:0}#foreground{fill:#ffffff;stroke-width:0}@media(prefers-color-scheme:dark){#background{fill:#ffffff}#foreground{fill:#7dbf1e}}]]>
+            <![CDATA[#background{fill:var(--logo-bg-color,#7dbf1e);stroke-width:0}#foreground{fill:var(--logo-text-color,#000);stroke-width:0}@media(prefers-color-scheme:dark){#background{fill:var(--logo-bg-color,#7dbf1e);}#foreground{fill:var(--logo-text-color,#fff);}}]]>
         </style>
     </defs>
-    <circle id="background" cx="256" cy="256" r="206"/>
-    <path id="foreground" d="m77.151945 459.07251 65.246405 2.20465 147.07636-335.22439-66.10276-2.23358zM317.98402 198.27496l-41.79695 39.65855 60.593 59.73049-60.19769 58.93978 41.40164 39.2992 98.20305-95.4178v-6.43304z"/>
+    <circle id="background" cx="206" cy="206" r="206"/>
+    <path id="foreground" d="m27.151945 409.07251 65.246405 2.20465L239.47471 76.05277l-66.10276-2.23358zM267.98402 148.27496l-41.79695 39.65855 60.593 59.73049-60.19769 58.93978 41.40164 39.2992 98.20305-95.4178v-6.43304z"/>
 </svg>
