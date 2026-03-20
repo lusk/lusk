@@ -12,11 +12,11 @@
 
   <link rel=stylesheet href=styles/globals/variables.css>
   <link rel=stylesheet href=styles/globals/reset.css>
-  <link rel=stylesheet href=styles/globals/fonts.css>
   <link rel=stylesheet href=styles/globals/base.css>
   <link rel=stylesheet href=styles/theme-light.css data-theme-switcher=light media="(prefers-color-scheme: light)">
   <link rel=stylesheet href=styles/theme-dark.css data-theme-switcher=dark media="(prefers-color-scheme: dark)">
   <link rel=stylesheet href=styles/screen.css>
+  <link rel=stylesheet href=styles/globals/fonts.css>
 
   <link rel=icon href=favicon.ico sizes=32x32>
   <link rel=icon href=styles/globals/icon.svg type=image/svg+xml>
@@ -25,11 +25,11 @@
 
 <body>
   <header class=wrapper>
-    <button is="theme-switcher">
-      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="logo" viewBox="0 0 412 412" height="60">
+    <button is="theme-switcher" class="logotype">
+      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 412 412" height="60">
           <defs>
               <style>
-                  <![CDATA[#background{fill:var(--logo-bg-color,#7dbf1e);stroke-width:0}#foreground{fill:var(--logo-text-color,#000);stroke-width:0}]]>
+                  <![CDATA[#background{fill:var(--logo-bg-color,#7dbf1e);stroke-width:0}#foreground{fill:var(--logo-text-color,#000);stroke-width:0}@media(prefers-color-scheme:dark){#background{fill:var(--logo-bg-color,#7dbf1e);}#foreground{fill:var(--logo-text-color,#fff);}}]]>
               </style>
           </defs>
           <circle id="background" cx="206" cy="206" r="206"/>

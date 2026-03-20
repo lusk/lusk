@@ -64,3 +64,9 @@ a {
     text-decoration: none;
   }
 }
+
+button.logotype {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
