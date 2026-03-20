@@ -188,7 +188,6 @@ class ThemeSwitcher extends HTMLButtonElement{
 
     // Set up accessibility attributes if not already defined by the developer
     if (Object.entries({
-      role: 'button',
       type: 'button',
       tabindex: '0',
       "aria-label": 'Change to different theme',
