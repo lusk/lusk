@@ -1,0 +1,236 @@
+:root {
+  --txt-m3: clamp(.512rem, .491rem + .106vw, .581rem);
+  --txt-m2: clamp(.64rem, .598rem + .208vw, .774rem);
+  --txt-m1: clamp(.8rem, .728rem + .36vw, 1.032rem);
+  --txt-0: clamp(1rem, .883rem + .583vw, 1.375rem);
+  --txt-1: clamp(1.25rem, 1.069rem + .905vw, 1.833rem);
+  --txt-2: clamp(1.563rem, 1.289rem + 1.368vw, 2.443rem);
+  --txt-3: clamp(1.953rem, 1.548rem + 2.025vw, 3.257rem);
+  --txt-4: clamp(2.441rem, 1.851rem + 2.951vw, 4.341rem);
+  --txt-5: clamp(3.052rem, 2.202rem + 4.249vw, 5.787rem);
+  --space-m3: clamp(.25rem, .211rem + .194vw, .375rem);
+  --space-m2: clamp(.5rem, .442rem + .291vw, .688rem);
+  --space-m1: clamp(.75rem, .653rem + .485vw, 1.063rem);
+  --space-0: clamp(1rem, .883rem + .583vw, 1.375rem);
+  --space-1: clamp(1.5rem, 1.325rem + .874vw, 2.063rem);
+  --space-2: clamp(2rem, 1.767rem + 1.165vw, 2.75rem);
+  --space-3: clamp(3rem, 2.65rem + 1.748vw, 4.125rem);
+  --space-4: clamp(4rem, 3.534rem + 2.33vw, 5.5rem);
+  --space-5: clamp(6rem, 5.301rem + 3.495vw, 8.25rem);
+  --space-m3-m2: clamp(.25rem, .114rem + .68vw, .688rem);
+  --space-m2-m1: clamp(.5rem, .325rem + .874vw, 1.063rem);
+  --space-m1-0: clamp(.75rem, .556rem + .971vw, 1.375rem);
+  --space-0-1: clamp(1rem, .67rem + 1.65vw, 2.063rem);
+  --space-1-2: clamp(1.5rem, 1.112rem + 1.942vw, 2.75rem);
+  --space-2-3: clamp(2rem, 1.34rem + 3.301vw, 4.125rem);
+  --space-3-4: clamp(3rem, 2.223rem + 3.883vw, 5.5rem);
+  --space-4-5: clamp(4rem, 2.68rem + 6.602vw, 8.25rem);
+  --space-m3-1: clamp(.25rem, -.313rem + 2.816vw, 2.063rem);
+  --space-m1-2: clamp(.75rem, .129rem + 3.107vw, 2.75rem);
+  --space-2-4: clamp(3rem, 2.223rem + 3.883vw, 5.5rem);
+  --gutter: var(--space-m1-0);
+  --border-radius: var(--space-m3);
+  --tracking: -.05ch;
+  --success-color: green;
+  --info-color: darkblue;
+  --warning-color: orange;
+  --error-color: red;
+  --transition-base: .25s ease;
+  --transition-movement: .2s linear;
+  --transition-fade: .2s ease;
+  --transition-bounce: .5s cubic-bezier(.5, .05, .2, 1.5);
+}
+
+*, :before, :after {
+  box-sizing: border-box;
+  font-size-adjust: ex-height .5;
+}
+
+html {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  scrollbar-gutter: stable;
+}
+
+input:user-invalid {
+  border-color: var(--error-color, red);
+}
+
+input:user-valid {
+  border-color: var(--success-color, green);
+}
+
+textarea:not([rows]) {
+  field-sizing: content;
+  min-height: 5lh;
+}
+
+textarea:not([cols]) {
+  width: 100%;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img, picture {
+  object-fit: cover;
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+h1, h2, h3, h4, button, input, label {
+  line-height: 1.1;
+}
+
+abbr[title] {
+  cursor: help;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin-block-end: 0;
+}
+
+:target {
+  scroll-margin-block: 5ex;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+@font-face {
+  font-family: InterVariable;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://lukas.stancik.work/styles/globals/InterVariable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: InterVariable;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://lukas.stancik.work/styles/globals/InterVariable-Italic.woff2") format("woff2");
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, Nimbus Sans L, Noto Sans, Arial, Helvetica, Helvetica Neue, sans-serif;
+  }
+}
+
+@font-feature-values InterVariable {
+@character-variant{
+  cv01: 1;
+  cv02: 2;
+  cv03: 3;
+  cv04: 4;
+  cv05: 5;
+  cv06: 6;
+  cv07: 7;
+  cv08: 8;
+  cv09: 9;
+  cv10: 10;
+  cv11: 11;
+  cv12: 12;
+  cv13: 13;
+  alt-1: 1;
+  alt-3: 9;
+  open-4: 2;
+  open-6: 3;
+  open-9: 4;
+  lc-l-with-tail: 5;
+  simplified-u: 6;
+  alt-double-s: 7;
+  uc-i-with-serif: 8;
+  uc-g-with-spur: 10;
+  single-story-a: 11;
+  compact-lc-f: 12;
+  compact-lc-t: 13;
+}
+@styleset{
+  ss01: 1;
+  ss02: 2;
+  ss03: 3;
+  ss04: 4;
+  ss05: 5;
+  ss06: 6;
+  ss07: 7;
+  ss08: 8;
+  open-digits: 1;
+  disambiguation: 2;
+  disambiguation-except-zero: 4;
+  round-quotes-and-commas: 3;
+  square-punctuation: 7;
+  square-quotes: 8;
+  circled-characters: 5;
+  squared-characters: 6;
+}
+}
+
+.grid {
+  grid-template-columns: repeat(var(--grid-placement, auto-fill),
+    minmax(var(--grid-min-item-size, 16rem), 1fr));
+  gap: var(--gutter, var(--space-m1-0));
+  display: grid;
+}
+
+.grid[data-layout="50-50"] {
+  --grid-placement: auto-fit;
+  --grid-min-item-size: clamp(16rem, 50vw, 26rem);
+}
+
+.grid[data-rows="masonry"] {
+  grid-template-rows: masonry;
+  align-items: start;
+}
+
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+
+.region {
+  padding-top: var(--region-space, var(--space-2-4));
+  padding-bottom: var(--region-space, var(--space-2-4));
+}
+
+.wrapper {
+  max-width: var(--wrapper-max-width, 85rem);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body.animate-theme-switcher {
+    transition: color var(--animation-fade, 1s ease-out),
+      background-color var(--animation-fade, 1s ease-out);
+  }
+}
+
+@media print {
+  body {
+    font-size: 8pt;
+  }
+}
+
+body {
+  font-size: var(--text-0);
+}

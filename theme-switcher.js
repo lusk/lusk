@@ -173,8 +173,6 @@ class ThemeSwitcher extends HTMLButtonElement{
         this.innerHTML = '<em style="cursor: help;">Almost there!</em>'
         this.title = err
         console.debug(err)
-      } else {
-        this.innerHTML = null
       }
 
       return
