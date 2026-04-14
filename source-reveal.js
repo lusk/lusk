@@ -50,7 +50,6 @@ let self = class HTMLSourceRevealElement extends HTMLElement {
 
         const matches = trimmed.match(/<([^\/]*?)[\s|>]/g) ?? []
         const tagNames = matches.map(m => m.replaceAll('<', '').replaceAll(' ', '').replaceAll('>', ''))
-        console.debug("tagNames", tagNames)
 
         // Line has no opening or closing tags
         if (tagNames.length === 0 && !trimmed.includes('</')) {

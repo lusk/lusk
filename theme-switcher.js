@@ -22,7 +22,7 @@ function themeFromDataset (el) {
   return el.dataset[toCamelCase(customElementName)]
 }
 
-class ThemeSwitcher extends HTMLButtonElement{
+class ThemeSwitcher extends HTMLElement{
   // Changes to the following attributes trigger attributeChangedCallback
   static observedAttributes = [allowedAttrName]
 
@@ -188,6 +188,7 @@ class ThemeSwitcher extends HTMLButtonElement{
     if (Object.entries({
       type: 'button',
       tabindex: '0',
+      role: 'button',
       "aria-label": 'Change to different theme',
       "aria-live": 'polite' // https://craigwfox.com/blog/2022-03/theme-toggle-web-component/
     }).map(entry => {
@@ -229,4 +230,4 @@ class ThemeSwitcher extends HTMLButtonElement{
   render(){}
 }
 
-window.customElements.define(customElementName, ThemeSwitcher, { extends: 'button' })
+window.customElements.define(customElementName, ThemeSwitcher)

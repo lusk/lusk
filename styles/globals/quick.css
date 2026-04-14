@@ -99,7 +99,7 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
   margin-block-end: 0;
 }
 
@@ -229,8 +229,36 @@ body {
   body {
     font-size: 8pt;
   }
+
+  a[href^="http"]:after {
+    content: " <" attr(href) ">";
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+    font-size: smaller;
+  }
 }
 
 body {
-  font-size: var(--text-0);
+  font-size: var(--txt-0);
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+dialog {
+  background-color: var(--bg);
+  max-width: 66vw;
+  margin: auto;
+}
+
+dialog::backdrop {
+  background-color: var(--bg);
+  opacity: .8;
 }
