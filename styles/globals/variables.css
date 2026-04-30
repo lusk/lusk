@@ -1,33 +1,35 @@
+html {
+  --scale: 1.3;
+  --medium: clamp(1em, 18px + .1vw, 1.5em);
+  font-size: var(--medium);
+  --xxx-large: calc(1rem * pow(var(--scale), 4));
+  --xx-large: calc(1rem * pow(var(--scale), 3));
+  --x-large: calc(1rem * pow(var(--scale), 2));
+  --large: calc(1rem * pow(var(--scale), 1));
+  --small: calc(1rem * pow(var(--scale), -.5));
+  --x-small: calc(1rem * pow(var(--scale), -1));
+  --xx-small: calc(1rem * pow(var(--scale), -2));
+}
+
 :root {
-  --txt-m3: clamp(.512rem, .491rem + .106vw, .581rem);
-  --txt-m2: clamp(.64rem, .598rem + .208vw, .774rem);
-  --txt-m1: clamp(.8rem, .728rem + .36vw, 1.032rem);
-  --txt-0: clamp(1rem, .883rem + .583vw, 1.375rem);
-  --txt-1: clamp(1.25rem, 1.069rem + .905vw, 1.833rem);
-  --txt-2: clamp(1.563rem, 1.289rem + 1.368vw, 2.443rem);
-  --txt-3: clamp(1.953rem, 1.548rem + 2.025vw, 3.257rem);
-  --txt-4: clamp(2.441rem, 1.851rem + 2.951vw, 4.341rem);
-  --txt-5: clamp(3.052rem, 2.202rem + 4.249vw, 5.787rem);
-  --space-m3: clamp(.25rem, .211rem + .194vw, .375rem);
-  --space-m2: clamp(.5rem, .442rem + .291vw, .688rem);
-  --space-m1: clamp(.75rem, .653rem + .485vw, 1.063rem);
-  --space-0: clamp(1rem, .883rem + .583vw, 1.375rem);
-  --space-1: clamp(1.5rem, 1.325rem + .874vw, 2.063rem);
-  --space-2: clamp(2rem, 1.767rem + 1.165vw, 2.75rem);
-  --space-3: clamp(3rem, 2.65rem + 1.748vw, 4.125rem);
-  --space-4: clamp(4rem, 3.534rem + 2.33vw, 5.5rem);
-  --space-5: clamp(6rem, 5.301rem + 3.495vw, 8.25rem);
-  --space-m3-m2: clamp(.25rem, .114rem + .68vw, .688rem);
-  --space-m2-m1: clamp(.5rem, .325rem + .874vw, 1.063rem);
-  --space-m1-0: clamp(.75rem, .556rem + .971vw, 1.375rem);
-  --space-0-1: clamp(1rem, .67rem + 1.65vw, 2.063rem);
-  --space-1-2: clamp(1.5rem, 1.112rem + 1.942vw, 2.75rem);
-  --space-2-3: clamp(2rem, 1.34rem + 3.301vw, 4.125rem);
-  --space-3-4: clamp(3rem, 2.223rem + 3.883vw, 5.5rem);
-  --space-4-5: clamp(4rem, 2.68rem + 6.602vw, 8.25rem);
-  --space-m3-1: clamp(.25rem, -.313rem + 2.816vw, 2.063rem);
-  --space-m1-2: clamp(.75rem, .129rem + 3.107vw, 2.75rem);
-  --space-2-4: clamp(3rem, 2.223rem + 3.883vw, 5.5rem);
+  --space-m3: .25lh;
+  --space-m2: .5lh;
+  --space-m1: .75lh;
+  --space-0: 1lh;
+  --space-1: 1.25lh;
+  --space-2: 1.5lh;
+  --space-3: 1.75lh;
+  --space-4: 2lh;
+  --space-m3-m2: clamp(.25lh, .4lh , .5lh);
+  --space-m2-m1: clamp(.5lh, .6lh, .75lh);
+  --space-m1-0: clamp(.75lh, .8lh, 1lh);
+  --space-0-1: clamp(1lh, 1.2lh, 1.25lh);
+  --space-1-2: clamp(1.25lh, 1.4lh, 1.5lh);
+  --space-2-3: clamp(1.5lh, 1.6lh, 1.75lh);
+  --space-3-4: clamp(1.75lh, 1.8lh, 2lh);
+  --space-m3-1: clamp(.25lh, .8lh, 1lh);
+  --space-m1-2: clamp(.75lh, 1lh, 1.5lh);
+  --space-2-4: clamp(1.5lh, 1.75lh, 2lh);
   --gutter: var(--space-m1-0);
   --border-radius: var(--space-m3);
   --tracking: -.05ch;
@@ -39,4 +41,36 @@
   --transition-movement: .2s linear;
   --transition-fade: .2s ease;
   --transition-bounce: .5s cubic-bezier(.5, .05, .2, 1.5);
+  --sans-font: sans-serif;
+  --serif-font: serif;
+  --mono-font: monospace;
+  --border-width: 1px;
+  --bg: #fff;
+  --accent-bg: #f5f7ff;
+  --text: #212121;
+  --text-light: #585858;
+  --border: #898ea4;
+  --accent: #0d47a1;
+  --accent-hover: #1266e2;
+  --accent-text: var(--bg);
+  --code: #d81b60;
+  --preformatted: #444;
+  --marked: #fd3;
+  --disabled: #efefef;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --accent-hover: #ffe099;
+    --accent-text: var(--bg);
+    --code: #f06292;
+    --preformatted: #bbb;
+    --disabled: #111;
+  }
 }

@@ -1,18 +1,58 @@
 @media print {
-  body {
-    font-size: 8pt;
+  @page {
+    margin: 1cm;
   }
 
-  a[href^="http"]:after {
-    content: " <" attr(href) ">";
+  body {
+    font-size: 8pt;
+    display: block;
+  }
+
+  p {
+    widows: 3;
+    orphans: 3;
+  }
+
+  hr {
+    background-color: gray;
+  }
+
+  figure, fieldset, img {
+    break-inside: avoid;
+  }
+
+  pre code {
+    white-space: pre-wrap;
+  }
+
+  details::details-content, details:not([open])::details-content {
+    display: contents;
+  }
+
+  fieldset, input, textarea, select {
+    border-radius: unset;
+    border: 1px solid gray;
+  }
+
+  article {
+    margin: 0;
+    padding: 0;
   }
 
   a {
     text-decoration: none;
   }
 
+  a[href^="http"]:after {
+    content: " <" attr(href) ">";
+  }
+
   abbr[title]:after {
     content: " (" attr(title) ")";
     font-size: smaller;
+  }
+
+  .dont-print, progress, input[type="file"], button[command], canvas {
+    display: none;
   }
 }

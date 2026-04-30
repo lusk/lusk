@@ -5,13 +5,14 @@ let self = class HTMLSourceRevealElement extends HTMLElement {
       mode: 'open'
     });
 
-    // <style>@import url("${ styleURL }")</style>
     this.shadowRoot.innerHTML = `
 			<style>
-			  :host { display: flex; flex-flow: column; }
-				header { display: grid; gap: 1em; grid-template-columns: auto 1fr; align-items: baseline; }
-				header h1 { opacity: 20%; }
+			  :host { display: flex; flex-flow: column; padding-inline-start: 3ex; }
+				header { position: relative; left: -3ex; }
+				summary { margin-block-start: 1lh; padding-inline: 1ex; opacity: 40%; }
+				h1 { display: inline-block; margin-inline-end: 1ex; font-size: 1lh; cursor: pointer; }
         pre { background-color: #3e3e3e; padding: 1em; overflow: auto; }
+        @media print { pre,header { display: none; } }
 			</style>
 		`;
 	}
@@ -37,7 +38,6 @@ let self = class HTMLSourceRevealElement extends HTMLElement {
 			return;
     }
 
-    this.silent = this.hasAttribute("silent");
     this.code = Array.from(this.children).map(el => el.outerHTML ?? el.textContent).map(codeBlock => {
       return codeBlock.split("\n").reduce((memo, val, index, arr) => {
         const trimmed = val.trim()
@@ -98,27 +98,26 @@ let self = class HTMLSourceRevealElement extends HTMLElement {
 
     let wrapper = document.createElement('slot');
     let header = document.createElement('header');
-    let pre
-    let code
+    let pre,code,summary,details
 
-    if (!this.silent) {
-      pre = document.createElement("pre");
-      code = document.createElement("code");
-      pre.classList.add("language-html","source-reveal");
-      code.textContent = this.code;
-      pre.append(code);
-    }
+    details = document.createElement("details");
+    summary = document.createElement("summary");
+    // summary.textContent = 'reveal code';
+    pre = document.createElement("pre");
+    code = document.createElement("code");
+    pre.classList.add("language-html","source-reveal");
+    code.textContent = this.code;
+    pre.append(code);
+    details.appendChild(summary);
+    details.appendChild(pre);
 
     // Turns id="text__some_text" into "<h1>Text, Some text</h1>"
     const parts = `${this.getAttribute("id")}`.split('__').map(part => part[0].toLocaleUpperCase() + part.substring(1).toLocaleLowerCase().replaceAll('_', ' '))
-    header.innerHTML = `<h1>${parts[0]}, ${parts[1]}</h1><a href="#top">top</a>`
+    summary.innerHTML = `<h1>${parts[0]}, ${parts[1]}</h1><a href="#top">top</a>`
+    header.appendChild(details);
 
     this.shadowRoot.appendChild(header);
     this.shadowRoot.appendChild(wrapper);
-
-    if (!this.silent) {
-      this.shadowRoot.appendChild(pre);
-    }
 	}
 }
 

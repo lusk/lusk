@@ -42,10 +42,6 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
-h1, h2, h3, h4, button, input, label {
-  line-height: 1.1;
-}
-
 abbr[title] {
   cursor: help;
   text-decoration-line: underline;
@@ -66,5 +62,4 @@ body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
 
 body {
   min-height: 100vh;
-  line-height: 1.5;
 }

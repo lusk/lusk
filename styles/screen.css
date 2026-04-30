@@ -1,34 +1,30 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-size: var(--txt-0);
-  line-height: 1.4;
+  font-size: var(--medium);
+  /*line-height: 1.4;*/
   letter-spacing: var(--tracking);
   margin-top: var(--region-space, var(--space-4));
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--header-color);
+  margin-block-start: 1lh;
 }
 
 h1,
 h2,
 h3 {
-  line-height: 1;
+  /*line-height: 1;*/
   letter-spacing: -0.075ch;
 }
 
-h1 {
-  font-size: var(--txt-5);
-}
-
-h2 {
-  font-size: var(--txt-4);
-}
-
-h3 {
-  font-size: var(--txt-3);
-}
+h1 { font-size: var(--xxx-large); }
+h2 { font-size: var(--xx-large); }
+h3 { font-size: var(--x-large); }
+h4 { font-size: var(--large); }
+h5 { font-size: var(--medium); }
+h6 { font-size: var(--small); }
 
 /* Set line lengths */
 p,
