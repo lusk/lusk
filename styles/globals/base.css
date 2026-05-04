@@ -38,4 +38,8 @@
     transition: color var(--animation-fade, 1s ease-out),
       background-color var(--animation-fade, 1s ease-out);
   }
+
+  @view-transition {
+    navigation: auto;
+  }
 }

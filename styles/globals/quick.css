@@ -1,14 +1,15 @@
 html {
   --scale: 1.3;
-  --medium: clamp(1em, 18px + .1vw, 1.5em);
+  --design-size: 18px;
+  --medium: clamp(1em, var(--design-size) + .1vw, 1.5em);
   font-size: var(--medium);
-  --xxx-large: calc(1rem * pow(var(--scale), 4));
-  --xx-large: calc(1rem * pow(var(--scale), 3));
-  --x-large: calc(1rem * pow(var(--scale), 2));
-  --large: calc(1rem * pow(var(--scale), 1));
-  --small: calc(1rem * pow(var(--scale), -.5));
-  --x-small: calc(1rem * pow(var(--scale), -1));
-  --xx-small: calc(1rem * pow(var(--scale), -2));
+  --xxx-large: calc(1rem * pow(var(--scale),   4));
+  --xx-large: calc(1rem * pow(var(--scale),   3));
+  --x-large: calc(1rem * pow(var(--scale),   2));
+  --large: calc(1rem * pow(var(--scale),   1));
+  --small: calc(1rem * pow(var(--scale),  -.5));
+  --x-small: calc(1rem * pow(var(--scale),  -1));
+  --xx-small: calc(1rem * pow(var(--scale),  -2));
 }
 
 :root {
@@ -20,16 +21,16 @@ html {
   --space-2: 1.5lh;
   --space-3: 1.75lh;
   --space-4: 2lh;
-  --space-m3-m2: clamp(.25lh, .4lh , .5lh);
-  --space-m2-m1: clamp(.5lh, .6lh, .75lh);
-  --space-m1-0: clamp(.75lh, .8lh, 1lh);
-  --space-0-1: clamp(1lh, 1.2lh, 1.25lh);
-  --space-1-2: clamp(1.25lh, 1.4lh, 1.5lh);
-  --space-2-3: clamp(1.5lh, 1.6lh, 1.75lh);
-  --space-3-4: clamp(1.75lh, 1.8lh, 2lh);
-  --space-m3-1: clamp(.25lh, .8lh, 1lh);
-  --space-m1-2: clamp(.75lh, 1lh, 1.5lh);
-  --space-2-4: clamp(1.5lh, 1.75lh, 2lh);
+  --space-m3-m2: clamp(var(--space-m3), calc(var(--space-m2) - var(--space-m3) / 2),  var(--space-m2));
+  --space-m2-m1: clamp(var(--space-m2), calc(var(--space-m1) - var(--space-m2) / 2),  var(--space-m1));
+  --space-m1-0: clamp(var(--space-m1), calc(var(--space-0)  - var(--space-m1) / 2),  var(--space-0));
+  --space-0-1: clamp(var(--space-0),  calc(var(--space-1)  - var(--space-0)  / 2),  var(--space-1));
+  --space-1-2: clamp(var(--space-1),  calc(var(--space-2)  - var(--space-1)  / 2),  var(--space-2));
+  --space-2-3: clamp(var(--space-2),  calc(var(--space-3)  - var(--space-2)  / 2),  var(--space-3));
+  --space-3-4: clamp(var(--space-3),  calc(var(--space-4)  - var(--space-3)  / 2),  var(--space-4));
+  --space-m3-1: clamp(var(--space-m3),  calc(var(--space-1) - var(--space-m3) / 2),  var(--space-1));
+  --space-m1-2: clamp(var(--space-m1),  calc(var(--space-2) - var(--space-m1) / 2),  var(--space-2));
+  --space-2-4: clamp(var(--space-2),   calc(var(--space-4) - var(--space-2)  / 2),  var(--space-4));
   --gutter: var(--space-m1-0);
   --border-radius: var(--space-m3);
   --tracking: -.05ch;
@@ -138,78 +139,7 @@ body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
 }
 
 body {
-  min-height: 100vh;
-}
-
-@font-face {
-  font-family: InterVariable;
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("https://lukas.stancik.work/styles/globals/InterVariable.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: InterVariable;
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("https://lukas.stancik.work/styles/globals/InterVariable-Italic.woff2") format("woff2");
-}
-
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: InterVariable, Nimbus Sans L, Noto Sans, Arial, Helvetica, Helvetica Neue, sans-serif;
-  }
-}
-
-@font-feature-values InterVariable {
-@character-variant{
-  cv01: 1;
-  cv02: 2;
-  cv03: 3;
-  cv04: 4;
-  cv05: 5;
-  cv06: 6;
-  cv07: 7;
-  cv08: 8;
-  cv09: 9;
-  cv10: 10;
-  cv11: 11;
-  cv12: 12;
-  cv13: 13;
-  alt-1: 1;
-  alt-3: 9;
-  open-4: 2;
-  open-6: 3;
-  open-9: 4;
-  lc-l-with-tail: 5;
-  simplified-u: 6;
-  alt-double-s: 7;
-  uc-i-with-serif: 8;
-  uc-g-with-spur: 10;
-  single-story-a: 11;
-  compact-lc-f: 12;
-  compact-lc-t: 13;
-}
-@styleset{
-  ss01: 1;
-  ss02: 2;
-  ss03: 3;
-  ss04: 4;
-  ss05: 5;
-  ss06: 6;
-  ss07: 7;
-  ss08: 8;
-  open-digits: 1;
-  disambiguation: 2;
-  disambiguation-except-zero: 4;
-  round-quotes-and-commas: 3;
-  square-punctuation: 7;
-  square-quotes: 8;
-  circled-characters: 5;
-  squared-characters: 6;
-}
+  min-height: 100dvh;
 }
 
 .grid {
@@ -251,6 +181,10 @@ body {
   body.animate-theme-switcher {
     transition: color var(--animation-fade, 1s ease-out),
       background-color var(--animation-fade, 1s ease-out);
+  }
+
+  @view-transition {
+    navigation: auto;
   }
 }
 
@@ -501,6 +435,7 @@ textarea, select, input {
   color: var(--text);
   background-color: var(--bg);
   border: var(--border-width) solid var(--border);
+  accent-color: var(--accent);
   display: inline-block;
 }
 
@@ -586,6 +521,7 @@ html {
 body {
   color: var(--text);
   background-color: var(--bg);
+  font-family: var(--serif-font);
   margin: 0;
 }
 
@@ -666,6 +602,14 @@ summary {
   cursor: pointer;
   word-break: break-word;
   font-weight: bold;
+}
+
+details {
+  margin-block: 1lh;
+}
+
+progress {
+  accent-color: var(--accent);
 }
 
 aside {
