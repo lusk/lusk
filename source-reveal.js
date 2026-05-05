@@ -7,10 +7,9 @@ let self = class HTMLSourceRevealElement extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
 			<style>
-			  :host { display: flex; flex-flow: column; padding-inline-start: 3ex; }
-				header { position: relative; left: -3ex; }
-				summary { margin-block-start: 1lh; padding-inline: 1ex; opacity: 40%; }
-				h1 { display: inline-block; margin-inline-end: 1ex; font-size: 1lh; cursor: pointer; }
+			  :host { display: flex; flex-flow: column; }
+				summary { margin-block-start: 1lh; opacity: 40%; }
+				h1 { display: inline-block; margin-inline-end: 1ex; font-size: inherit; cursor: pointer; }
         pre { background-color: #3e3e3e; padding: 1em; overflow: auto; }
         @media print { pre,header { display: none; } }
 			</style>
