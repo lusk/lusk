@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("https://lukas.stancik.work/styles/globals/InterVariable.woff2") format("woff2");
+  src: url("https://lukas.stancik.cz/styles/globals/InterVariable.woff2") format("woff2");
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-style: italic;
   font-weight: 100 900;
   font-display: swap;
-  src: url("https://lukas.stancik.work/styles/globals/InterVariable-Italic.woff2") format("woff2");
+  src: url("https://lukas.stancik.cz/styles/globals/InterVariable-Italic.woff2") format("woff2");
 }
 
 @supports (font-variation-settings: normal) {
