@@ -6,8 +6,8 @@
   "background_color": "rgb(0, 0, 0)",
   "theme_color": "rgb(255, 255, 255)",
   "icons": [
-    { "src": "https://lukas.stancik.work/styles/globals/icon-192.png", "type": "image/png", "sizes": "192x192" },
-    { "src": "https://lukas.stancik.work/styles/globals/icon-512.png", "type": "image/png", "sizes": "512x512" },
-    { "src": "https://lukas.stancik.work/styles/globals/icon-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+    { "src": "https://lukas.stancik.cz/styles/globals/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "https://lukas.stancik.cz/styles/globals/icon-512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "https://lukas.stancik.cz/styles/globals/icon-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
   ]
 }
